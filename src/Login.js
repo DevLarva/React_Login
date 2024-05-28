@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
 import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper } from '@mui/material';
 
 const Login = () => {
   const { setUser } = useContext(GlobalContext);
-  const [username, setUsername] = useState('');
+  const [userId, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('A');
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    setUser({ username, location });
+    setUser({ userId, location });
     navigate(`/home/${location}`);
   };
 
@@ -26,32 +26,23 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            label="Username"
+            label="아이디"
             autoComplete="username"
             autoFocus
-            value={username}
+            value={userId}
             onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label="비밀번호"
             type="password"
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <RadioGroup
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            row
-            sx={{ justifyContent: 'center', marginTop: 2 }}
-          >
-            <FormControlLabel value="A" control={<Radio />} label="A" />
-            <FormControlLabel value="B" control={<Radio />} label="B" />
-            <FormControlLabel value="C" control={<Radio />} label="C" />
-          </RadioGroup>
+          
           <Button
             fullWidth
             variant="contained"
@@ -59,8 +50,17 @@ const Login = () => {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleLogin}
           >
-            Login
+            로그인
           </Button>
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <Button
+              fullWidth
+              variant="outlined"
+              color="primary"
+            >
+              회원가입
+            </Button>
+          </Link>
         </Box>
       </Paper>
     </Container>
