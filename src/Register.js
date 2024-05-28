@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper } from '@mui/material';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
+  const [UserId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [location, setLocation] = useState('A');
@@ -31,17 +31,17 @@ const Register = () => {
             margin="normal"
             required
             fullWidth
-            label="Username"
-            autoComplete="username"
+            label="아이디"
+            autoComplete="UserId"
             autoFocus
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={UserId}
+            onChange={(e) => setUserId(e.target.value)}
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label="비밀번호"
             type="password"
             autoComplete="new-password"
             value={password}
@@ -51,7 +51,7 @@ const Register = () => {
             margin="normal"
             required
             fullWidth
-            label="Confirm Password"
+            label="비밀번호 확인"
             type="password"
             autoComplete="new-password"
             value={confirmPassword}
@@ -63,9 +63,9 @@ const Register = () => {
             row
             sx={{ justifyContent: 'center', marginTop: 2 }}
           >
-            <FormControlLabel value="A" control={<Radio />} label="A" />
-            <FormControlLabel value="B" control={<Radio />} label="B" />
-            <FormControlLabel value="C" control={<Radio />} label="C" />
+            <FormControlLabel value="A" control={<Radio />} label="앤드앤" />
+            <FormControlLabel value="B" control={<Radio />} label="클라이언트" />
+            <FormControlLabel value="C" control={<Radio />} label="외주업체" />
           </RadioGroup>
           <Button
             fullWidth
@@ -74,7 +74,7 @@ const Register = () => {
             sx={{ mt: 3, mb: 2 }}
             onClick={handleRegister}
           >
-            Register
+            회원가입
           </Button>
         </Box>
       </Paper>
@@ -83,3 +83,6 @@ const Register = () => {
 };
 
 export default Register;
+
+
+//i 버튼 추가해서 카테고리중에서 어떤걸 선택해야 하는지 알려주는 tip을 적어본다면 어떤가?
