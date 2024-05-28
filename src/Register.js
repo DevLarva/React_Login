@@ -24,7 +24,7 @@ const Register = () => {
     <Container component="main" maxWidth="xs">
       <Paper elevation={3} sx={{ padding: 2, marginTop: 8 }}>
         <Typography component="h1" variant="h5" align="center">
-          Register
+          회원가입
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
           <TextField
@@ -63,9 +63,9 @@ const Register = () => {
             row
             sx={{ justifyContent: 'center', marginTop: 2 }}
           >
-            <FormControlLabel value="A" control={<Radio />} label="앤드앤" />
-            <FormControlLabel value="B" control={<Radio />} label="클라이언트" />
-            <FormControlLabel value="C" control={<Radio />} label="외주업체" />
+            <FormControlLabel value="AndN" control={<Radio />} label="앤드앤" />
+            <FormControlLabel value="Client" control={<Radio />} label="클라이언트" />
+            <FormControlLabel value="Outsourcing" control={<Radio />} label="외주업체" />
           </RadioGroup>
           <Button
             fullWidth
