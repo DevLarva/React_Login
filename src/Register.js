@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper } from '@mui/material';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -9,11 +9,21 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [location, setLocation] = useState('AndN');
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {     //비밀번호 유효성 검사
+    if (password !== confirmPassword) {
+      setPasswordError('비밀번호가 일치하지 않습니다.');
+    } else {
+      setPasswordError('');
+    }
+  }, [password, confirmPassword]);
+
 
   const handleRegister = () => {
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      alert('비밀번호가 일치하지 않습니다.');
       return;
     }
 
@@ -47,6 +57,7 @@ const Register = () => {
             type="password"
             autoComplete="new-password"
             value={password}
+            placeholder='영문,숫자 조합으로 8자 이상을 입력해주세요.'
             onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
@@ -58,6 +69,8 @@ const Register = () => {
             autoComplete="new-password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            error={Boolean(passwordError)}
+            helperText={passwordError}
           />
           <RadioGroup
             value={location}
@@ -70,7 +83,7 @@ const Register = () => {
                 <FormControlLabel value="AndN" control={<Radio />} label="앤드앤" />
               </div>
               <Tooltip id="AndN" place="top" effect="solid">
-                앤드앤 회사에 속한 경우 선택하세요
+                앤드앤 회사에 속한 경우 선택하세요.
               </Tooltip>
             </div>
             <div>
@@ -78,7 +91,7 @@ const Register = () => {
                 <FormControlLabel value="Client" control={<Radio />} label="클라이언트" />
               </div>
               <Tooltip id="Client" place="top" effect="solid">
-                클라이언트인 경우 선택하세요
+                클라이언트인 경우 선택하세요. 
               </Tooltip>
             </div>
             <div>
@@ -86,7 +99,7 @@ const Register = () => {
                 <FormControlLabel value="Outsourcing" control={<Radio />} label="외주업체" />
               </div>
               <Tooltip id="Outsourcing" place="top" effect="solid">
-                외주업체인 경우 선택하세요
+                외주업체인 경우 선택하세요.
               </Tooltip>
             </div>
           </RadioGroup>
@@ -109,4 +122,4 @@ export default Register;
 
 
 
-//i 버튼 추가해서 카테고리중에서 어떤걸 선택해야 하는지 알려주는 tip을 적어본다면 어떤가?
+//i 버튼 추가해서 카테고리중에서 어떤걸 선택해야 하는지 알려주는 tip을 적어본다면 어떤가?  
