@@ -10,20 +10,35 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [location, setLocation] = useState('AndN');
   const [passwordError, setPasswordError] = useState('');
+  const [passwordValid, setPasswordValid] = useState(false); // 초기에는 false로 설정
+  const [passwordTouched, setPasswordTouched] = useState(false); // 비밀번호 입력 여부를 나타내는 상태 변수
   const navigate = useNavigate();
 
-  useEffect(() => {     //비밀번호 유효성 검사
-    if (password !== confirmPassword) {
-      setPasswordError('비밀번호가 일치하지 않습니다.');
-    } else {
-      setPasswordError('');
-    }
-  }, [password, confirmPassword]);
+  const passwordValidation = (password) => {
+    const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/; // 영문, 숫자, 특수문자 포함, 8자 이상
+    return regex.test(password);
+  };
 
+  useEffect(() => {     
+    if (passwordTouched) { // 비밀번호 입력이 완료된 경우에만 검사
+      if (password !== confirmPassword) {
+        setPasswordError('비밀번호가 일치하지 않습니다.');
+      } else {
+        setPasswordError('');
+      }
+
+      setPasswordValid(passwordValidation(password));
+    }
+  }, [password, confirmPassword, passwordTouched]);
 
   const handleRegister = () => {
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    if (!passwordValid) {
+      alert('비밀번호가 유효하지 않습니다. 영문, 숫자, 특수문자 포함하여 8자 이상을 입력해주세요.');
       return;
     }
 
@@ -57,8 +72,11 @@ const Register = () => {
             type="password"
             autoComplete="new-password"
             value={password}
-            placeholder='영문,숫자 조합으로 8자 이상을 입력해주세요.'
+            placeholder='영문, 숫자, 특수문자 포함하여 8자 이상을 입력해주세요.'
             onChange={(e) => setPassword(e.target.value)}
+            error={!passwordValid && passwordTouched} // 비밀번호가 유효하지 않으면서 입력이 완료된 경우에만 에러 표시
+            helperText={!passwordValid && passwordTouched && '비밀번호는 영문, 숫자, 특수문자 포함하여 8자 이상이어야 합니다.'}
+            onBlur={() => setPasswordTouched(true)} // 비밀번호 입력이 완료되었음을 표시
           />
           <TextField
             margin="normal"
@@ -119,6 +137,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 
