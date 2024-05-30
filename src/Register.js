@@ -5,8 +5,9 @@ import 'react-tooltip/dist/react-tooltip.css';
 import { Tooltip } from 'react-tooltip';
 
 const Register = () => {
-  const [UserId, setUserId] = useState('');
+  const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [location, setLocation] = useState('AndN');
   const [passwordError, setPasswordError] = useState('');
@@ -54,14 +55,23 @@ const Register = () => {
           회원가입
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="이름"
+            autoComplete="userName"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
           <TextField
             margin="normal"
             required
             fullWidth
             label="아이디"
-            autoComplete="UserId"
+            autoComplete="userId"
             autoFocus
-            value={UserId}
+            value={userId}
             onChange={(e) => setUserId(e.target.value)}
           />
           <TextField
