@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper } from '@mui/material';
+import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper, Grid, IconButton, Tooltip } from '@mui/material';
 import 'react-tooltip/dist/react-tooltip.css';
-import { Tooltip } from 'react-tooltip';
+import InfoIcon from '@mui/icons-material/Info';
 
 const Register = () => {
   const [userId, setUserId] = useState('');
@@ -11,17 +11,17 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [location, setLocation] = useState('AndN');
   const [passwordError, setPasswordError] = useState('');
-  const [passwordValid, setPasswordValid] = useState(false); // 초기에는 false로 설정
-  const [passwordTouched, setPasswordTouched] = useState(false); // 비밀번호 입력 여부를 나타내는 상태 변수
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
   const navigate = useNavigate();
 
   const passwordValidation = (password) => {
-    const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/; // 영문, 숫자, 특수문자 포함, 8자 이상
+    const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     return regex.test(password);
   };
 
-  useEffect(() => {     
-    if (passwordTouched) { // 비밀번호 입력이 완료된 경우에만 검사
+  useEffect(() => {
+    if (passwordTouched) {
       if (password !== confirmPassword) {
         setPasswordError('비밀번호가 일치하지 않습니다.');
       } else {
@@ -33,6 +33,11 @@ const Register = () => {
   }, [password, confirmPassword, passwordTouched]);
 
   const handleRegister = () => {
+    if (!userName || !userId || !password || !confirmPassword) {
+      alert('모든 필드를 입력해주세요.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
       return;
@@ -43,9 +48,13 @@ const Register = () => {
       return;
     }
 
-    // Here, you would typically send the registration data to the backend API
-    // For now, let's just navigate to the login page
+    alert('회원가입이 완료되었습니다!');
     navigate('/');
+  };
+
+  const handleCheckUserId = () => {
+    alert('아이디 중복 검사를 진행합니다.');
+    //TODO: 이후에 실제로 중복 검사를 위한 API 호출 로직을 추가해야함.
   };
 
   return (
@@ -55,25 +64,36 @@ const Register = () => {
           회원가입
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
-        <TextField
+          <TextField
             margin="normal"
             required
             fullWidth
             label="이름"
             autoComplete="userName"
             value={userName}
+            autoFocus
             onChange={(e) => setUserName(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            label="아이디"
-            autoComplete="userId"
-            autoFocus
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-          />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="아이디"
+              autoComplete="userId"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+            />
+            <Button variant="contained" color="primary" onClick={handleCheckUserId}
+              sx={{
+                width: '100px',
+                height: '55px',
+                padding: '10px',
+                marginTop: 1,
+              }}>
+              중복 검사
+            </Button>
+          </Box>
           <TextField
             margin="normal"
             required
@@ -84,9 +104,9 @@ const Register = () => {
             value={password}
             placeholder='영문, 숫자, 특수문자 포함하여 8자 이상을 입력해주세요.'
             onChange={(e) => setPassword(e.target.value)}
-            error={!passwordValid && passwordTouched} // 비밀번호가 유효하지 않으면서 입력이 완료된 경우에만 에러 표시
+            error={!passwordValid && passwordTouched}
             helperText={!passwordValid && passwordTouched && '비밀번호는 영문, 숫자, 특수문자 포함하여 8자 이상이어야 합니다.'}
-            onBlur={() => setPasswordTouched(true)} // 비밀번호 입력이 완료되었음을 표시
+            onBlur={() => setPasswordTouched(true)}
           />
           <TextField
             margin="normal"
@@ -107,27 +127,18 @@ const Register = () => {
             sx={{ justifyContent: 'center', marginTop: 2 }}
           >
             <div>
-              <div data-tooltip-id="AndN">
+              <Tooltip title="앤드앤 회사에 속한 경우 선택하세요." placement="top" arrow>
                 <FormControlLabel value="AndN" control={<Radio />} label="앤드앤" />
-              </div>
-              <Tooltip id="AndN" place="top" effect="solid">
-                앤드앤 회사에 속한 경우 선택하세요.
               </Tooltip>
             </div>
             <div>
-              <div data-tooltip-id="Client">
+              <Tooltip title="클라이언트인 경우 선택하세요." placement="top" arrow>
                 <FormControlLabel value="Client" control={<Radio />} label="클라이언트" />
-              </div>
-              <Tooltip id="Client" place="top" effect="solid">
-                클라이언트인 경우 선택하세요. 
               </Tooltip>
             </div>
             <div>
-              <div data-tooltip-id="Outsourcing">
+              <Tooltip title="외주업체인 경우 선택하세요." placement="top" arrow>
                 <FormControlLabel value="Outsourcing" control={<Radio />} label="외주업체" />
-              </div>
-              <Tooltip id="Outsourcing" place="top" effect="solid">
-                외주업체인 경우 선택하세요.
               </Tooltip>
             </div>
           </RadioGroup>
@@ -147,6 +158,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 

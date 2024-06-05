@@ -65,7 +65,14 @@ const Login = () => {
       </Paper>
       <Grid container spacing={1} justifyContent="space-between" sx={{ marginTop: 0.1 }}>
         <Grid item xs={4}>
-          <Link to="/find-password" style={{ textDecoration: 'none' }} fullWidth color='primary'>
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <Button fullWidth color="primary">
+              회원가입
+            </Button>
+          </Link>
+        </Grid>
+        <Grid item xs={4}>
+          <Link to="/find-password" style={{ textDecoration: 'none' }}>
             <Button fullWidth color="primary">
               비밀번호 찾기
             </Button>
@@ -78,13 +85,7 @@ const Login = () => {
             </Button>
           </Link>
         </Grid>
-        <Grid item xs={4}>
-          <Link to="/register" style={{ textDecoration: 'none' }}>
-            <Button fullWidth color="primary">
-              회원가입
-            </Button>
-          </Link>
-        </Grid>
+
       </Grid>
     </Container>
   );
