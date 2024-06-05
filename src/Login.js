@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
-import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper } from '@mui/material';
+import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper, Grid } from '@mui/material';
 
 const Login = () => {
   const { setUser } = useContext(GlobalContext);
@@ -42,7 +42,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          
+
           <Button
             fullWidth
             variant="contained"
@@ -52,15 +52,30 @@ const Login = () => {
           >
             로그인
           </Button>
-          <Link to="/register" style={{ textDecoration: 'none' }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              color="primary"
-            >
-              회원가입
-            </Button>
-          </Link>
+
+          <Grid container spacing={2} justifyContent="space-between">
+            <Grid item xs={4}>
+              <Link to="/reset-password" style={{ textDecoration: 'none' }}>
+                <Button fullWidth color="primary">
+                  비밀번호 찾기
+                </Button>
+              </Link>
+            </Grid>
+            <Grid item xs={4}>
+              <Link to="/find-username" style={{ textDecoration: 'none' }}>
+                <Button fullWidth color="primary">
+                  아이디 찾기
+                </Button>
+              </Link>
+            </Grid>
+            <Grid item xs={4}>
+              <Link to="/register" style={{ textDecoration: 'none' }}>
+                <Button fullWidth color="primary">
+                  회원가입
+                </Button>
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Paper>
     </Container>
