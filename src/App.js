@@ -5,6 +5,8 @@ import Register from './Register';
 import Home from './Home';
 import { GlobalContextProvider } from './GlobalContext';
 import './styles.css';
+import PasswordFd from './PasswordFd';
+import UseridFd from './UseridFd';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home/:location" element={<Home />} />
+          <Route path="/find-userid" element={<UseridFd />} />
+          <Route path="/find-password" element={<PasswordFd />} />
         </Routes>
       </Router>
     </GlobalContextProvider>

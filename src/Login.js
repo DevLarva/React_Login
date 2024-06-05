@@ -55,14 +55,14 @@ const Login = () => {
 
           <Grid container spacing={2} justifyContent="space-between">
             <Grid item xs={4}>
-              <Link to="/reset-password" style={{ textDecoration: 'none' }}>
+              <Link to="/find-password" style={{ textDecoration: 'none' }}>
                 <Button fullWidth color="primary">
                   비밀번호 찾기
                 </Button>
               </Link>
             </Grid>
             <Grid item xs={4}>
-              <Link to="/find-username" style={{ textDecoration: 'none' }}>
+              <Link to="/find-userid" style={{ textDecoration: 'none' }}>
                 <Button fullWidth color="primary">
                   아이디 찾기
                 </Button>
