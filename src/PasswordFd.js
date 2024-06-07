@@ -5,11 +5,53 @@ import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container,
 
 const PasswordFd = () => {
     const navigate = useNavigate();
+    const [findPassword, setfindPassword] = useState('');
+    const [emailField, setemailField] = useState('');
+    const [AuthenticationCode, setAuthenticationCode] = useState('');
 
     return (
-        <Typography component="h1" variant="h5" align="center">
-            비번 찾기 페이지
-        </Typography>
+        <Container component="main" maxWidth="xs">
+            <Paper elevation={5} sx={{ padding: 2, marginTop: 2 }}>
+                <Box component="form" noValidate sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="아이디"
+                        autoComplete="findPassword"
+                        autoFocus
+                        value={findPassword}
+                        onChange={(e) => setfindPassword(e.target.value)}
+                    />
+                </Box>
+                <Box component="form" noValidate sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="이메일"
+                        autoComplete="emailField"
+                        autoFocus
+                        value={emailField}
+                        onChange={(e) => setemailField(e.target.value)}
+                    />
+                </Box>
+
+
+                <Box component="form" noValidate sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="인증코드"
+                        autoComplete="AuthenticationCode"
+                        autoFocus
+                        value={AuthenticationCode}
+                        onChange={(e) => setAuthenticationCode(e.target.value)}
+                    />
+                </Box>
+            </Paper>
+        </Container>
     );
 };
 
