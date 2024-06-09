@@ -12,6 +12,13 @@ const PasswordFd = () => {
     return (
         <Container component="main" maxWidth="xs">
             <Paper elevation={5} sx={{ padding: 2, marginTop: 2 }}>
+                <Typography component="h1" variant="h5" align="left" sx={{ fontWeight: "medium", marginBottom: 1 }}>
+                    비밀 번호 찾기
+                </Typography>
+                <Typography component="h4" variant="subtitle1" align="left" sx={{ fontWeight: "light" }}>
+                    가입할 때 입력했던 정보를 입력해주세요.
+                </Typography>
+
                 <Box component="form" noValidate sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
@@ -31,7 +38,6 @@ const PasswordFd = () => {
                         fullWidth
                         label="이메일"
                         autoComplete="emailField"
-                        autoFocus
                         value={emailField}
                         onChange={(e) => setemailField(e.target.value)}
                     />
@@ -45,16 +51,16 @@ const PasswordFd = () => {
                         fullWidth
                         label="인증코드"
                         autoComplete="AuthenticationCode"
-                        autoFocus
                         value={AuthenticationCode}
                         onChange={(e) => setAuthenticationCode(e.target.value)}
                     />
                 </Box>
             </Paper>
-        </Container>
+        </Container >
     );
 };
 
 
 
 export default PasswordFd;
+
