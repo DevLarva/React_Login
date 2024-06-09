@@ -11,7 +11,7 @@ const Home = () => {
     return <Navigate to="/" />;
   }
 
-  return (     
+  return (
     <Container component="main" maxWidth="xs">
       <Paper elevation={3} sx={{ padding: 2, marginTop: 8 }}>
         <Typography component="h1" variant="h5" align="center">
