@@ -7,6 +7,7 @@ const PasswordFd = () => {
     const [emailField, setemailField] = useState('');
     const [AuthenticationCode, setAuthenticationCode] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [codeSent, setCodeSent] = useState(false);
 
     const handleEmailValidation = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,6 +31,7 @@ const PasswordFd = () => {
         handleEmailValidation(emailField);
         if (!emailError && findPassword && emailField) {
             // 인증 번호 보내는 로직 추가
+            setCodeSent(true);
             console.log('인증 번호가 전송되었습니다.');
         }
     };
@@ -101,19 +103,21 @@ const PasswordFd = () => {
                                         mb: 2,
                                     }}
                                     onClick={handleSendCode}
-                                    disabled={!findPassword || !emailField}
+                                    disabled={!findPassword || !emailField || !!emailError}
                                 >
                                     인증 번호 받기
                                 </Button>
-                                <TextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    label="인증번호"
-                                    autoComplete="AuthenticationCode"
-                                    value={AuthenticationCode}
-                                    onChange={(e) => setAuthenticationCode(e.target.value)}
-                                />
+                                {codeSent && (
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        label="인증번호"
+                                        autoComplete="AuthenticationCode"
+                                        value={AuthenticationCode}
+                                        onChange={(e) => setAuthenticationCode(e.target.value)}
+                                    />
+                                )}
                             </Box>
                         </Paper>
                     </Box>
@@ -124,6 +128,7 @@ const PasswordFd = () => {
 };
 
 export default PasswordFd;
+
 
 
 
