@@ -1,33 +1,41 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
-import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper, Grid } from '@mui/material';
-import Andnlogo from './assets/andnlogo.png'
+import { Box, TextField, Button, Container, Typography, Paper, Grid } from '@mui/material';
+import Andnlogo from './assets/andnlogo.png';
+import { signin } from './ApiService'; // signin 함수 import
 
 const Login = () => {
   const { setUser } = useContext(GlobalContext);
   const [userId, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('A');
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    setUser({ userId, location });
-    navigate(`/home/${location}`);
+    const userDTO = {
+      userId,
+      password,
+    };
+
+    signin(userDTO)
+      .then((response) => {
+        // 로그인 성공 시
+        setUser({ userId, location: 'A' });
+        navigate(`/home`);
+      })
+      .catch((error) => {
+        // 로그인 실패 시
+        alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.');
+        console.error('Login error:', error);
+      });
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <Typography component="h2" variant="h1" align="center" sx={{ marginTop: 4 }} >
-        <img
-          src={Andnlogo}
-          alt="And N"
-          height={70}
-          style={{ filter: 'invert(1)' }}
-        />
+      <Typography component="h2" variant="h1" align="center" sx={{ marginTop: 4 }}>
+        <img src={Andnlogo} alt="And N" height={70} style={{ filter: 'invert(1)' }} />
       </Typography>
       <Paper elevation={5} sx={{ padding: 2, marginTop: 2 }}>
-
         <Box component="form" noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -49,7 +57,6 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
           <Button
             fullWidth
             variant="contained"
@@ -59,8 +66,6 @@ const Login = () => {
           >
             로그인
           </Button>
-
-
         </Box>
       </Paper>
       <Grid container spacing={1} justifyContent="space-between" sx={{ marginTop: 0.1 }}>
@@ -85,7 +90,6 @@ const Login = () => {
             </Button>
           </Link>
         </Grid>
-
       </Grid>
     </Container>
   );

@@ -81,7 +81,7 @@ const PasswordFd = () => {
                                 <TextField
                                     margin="normal"
                                     required
-                                    fullWidth
+                                    fullWidth  
                                     label="이메일"
                                     autoComplete="emailField"
                                     placeholder='인증번호를 받을 이메일을 입력해주세요.'
@@ -105,7 +105,9 @@ const PasswordFd = () => {
                                     onClick={handleSendCode}
                                     disabled={!findPassword || !emailField || !!emailError}
                                 >
-                                    인증 번호 받기
+                                    <Typography variant="subtitle1" align="center">
+                                        인증 번호 받기
+                                    </Typography>
                                 </Button>
                                 {codeSent && (
                                     <TextField
@@ -136,5 +138,6 @@ export default PasswordFd;
 - 텍필 다 채우면 버튼 잘보이게 그전에는 클릭도 못하게, 클릭하고 나면 나오게끔
 - 인증번호는 어떻게 보내고 받는지는 고민
 - 완료 버튼 위치 고민
+- 시간 5분주는거 추가
 - 일단 로직부터
 */
