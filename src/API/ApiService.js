@@ -19,21 +19,18 @@ export function call(api, method, request) {
     };
 
     if (request) {
-        // GET method
         options.body = JSON.stringify(request);
     }
     return fetch(options.url, options)
         .then((response) =>
             response.json().then((json) => {
                 if (!response.ok) {
-                    // response.ok가 true이면 정상적인 리스폰스를 받은것, 아니면 에러 리스폰스를 받은것.
                     return Promise.reject(json);
                 }
                 return json;
             })
         )
         .catch((error) => {
-            // 추가된 부분
             console.log(error.status);
             if (error.status === 403) {
                 window.location.href = "/login"; // redirect
@@ -60,12 +57,21 @@ export function signout() {
 export function signup(userDTO) {
     return call("/api/auth/signup", "POST", userDTO)
         .then((response) => {
-            // 성공적인 응답 처리 (필요에 따라 추가 작업)
             return response;
         })
         .catch((error) => {
-            // 오류가 발생하면 알림창을 띄움
             console.error("Error during sign-up:", error);
             alert("회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.");
+        });
+}
+
+export function checkUserId(userDTO) {
+    return call("/api/auth/checkUserID", "POST", userDTO)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.error("Error during user ID check:", error);
+            alert("이미 존재하는 아이디 입니다.");
         });
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper, Grid, IconButton, Tooltip } from '@mui/material';
-import 'react-tooltip/dist/react-tooltip.css';
+import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper, Grid, Tooltip } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import { signup, checkUserId } from './API/ApiService';
 
 const Register = () => {
   const [userId, setUserId] = useState('');
@@ -13,6 +13,7 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
+  const [userIdError, setUserIdError] = useState('');
   const navigate = useNavigate();
 
   const passwordValidation = (password) => {
@@ -33,6 +34,13 @@ const Register = () => {
   }, [password, confirmPassword, passwordTouched]);
 
   const handleRegister = () => {
+    const userDTO = {
+      name: userName,
+      userID: userId,
+      password: password,
+      role: location
+    };
+
     if (!userName || !userId || !password || !confirmPassword) {
       alert('모든 필드를 입력해주세요.');
       return;
@@ -48,13 +56,39 @@ const Register = () => {
       return;
     }
 
-    alert('회원가입이 완료되었습니다!');
-    navigate('/');
+    signup(userDTO)
+      .then((response) => {
+        // 회원가입 성공 시
+        alert('회원가입이 완료되었습니다!');
+        navigate('/');
+        console.log('회원가입 성공');
+      })
+      .catch((error) => {
+        // 회원가입 실패 시
+        alert('회원가입에 실패했습니다.');
+        console.error('Register error:', error);
+      });
   };
 
   const handleCheckUserId = () => {
-    alert('아이디 중복 검사를 진행합니다.');
-    //TODO: 이후에 실제로 중복 검사를 위한 API 호출 로직을 추가해야함.
+    if (!userId) {
+      alert('아이디를 입력해주세요.');
+      return;
+    }
+
+    checkUserId({ userID: userId })
+      .then((response) => {
+        if (response.exists) {
+          setUserIdError('이미 존재하는 아이디입니다.');
+          alert('이미 존재하는 아이디입니다.');
+        } else {
+          setUserIdError('');
+          alert('사용 가능한 아이디입니다.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error during user ID check:', error);
+      });
   };
 
   return (
@@ -83,6 +117,8 @@ const Register = () => {
               autoComplete="userId"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
+              error={Boolean(userIdError)}
+              helperText={userIdError}
             />
             <Button variant="contained" color="primary" onClick={handleCheckUserId}
               sx={{
@@ -126,21 +162,15 @@ const Register = () => {
             row
             sx={{ justifyContent: 'center', marginTop: 2 }}
           >
-            <div>
-              <Tooltip title="앤드앤 회사에 속한 경우 선택하세요." placement="top" arrow>
-                <FormControlLabel value="AndN" control={<Radio />} label="앤드앤" />
-              </Tooltip>
-            </div>
-            <div>
-              <Tooltip title="클라이언트인 경우 선택하세요." placement="top" arrow>
-                <FormControlLabel value="Client" control={<Radio />} label="클라이언트" />
-              </Tooltip>
-            </div>
-            <div>
-              <Tooltip title="외주업체인 경우 선택하세요." placement="top" arrow>
-                <FormControlLabel value="Outsourcing" control={<Radio />} label="외주업체" />
-              </Tooltip>
-            </div>
+            <Tooltip title="앤드앤 회사에 속한 경우 선택하세요." placement="top" arrow>
+              <FormControlLabel value="앤드앤" control={<Radio />} label="앤드앤" />
+            </Tooltip>
+            <Tooltip title="클라이언트인 경우 선택하세요." placement="top" arrow>
+              <FormControlLabel value="클라이언트" control={<Radio />} label="클라이언트" />
+            </Tooltip>
+            <Tooltip title="외주업체인 경우 선택하세요." placement="top" arrow>
+              <FormControlLabel value="외주업체" control={<Radio />} label="외주업체" />
+            </Tooltip>
           </RadioGroup>
           <Button
             fullWidth
@@ -158,6 +188,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 
