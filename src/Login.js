@@ -10,18 +10,20 @@ const Login = () => {
   const [userId, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [location, setLocation] = useState('A');
 
   const handleLogin = () => {
     const userDTO = {
-      userId,
-      password,
+      userID: userId,
+      password: password,
     };
 
     signin(userDTO)
       .then((response) => {
         // 로그인 성공 시
-        setUser({ userId, location: 'A' });
-        navigate(`/home`);
+        setUser({ userId, location });
+        navigate(`/home/${location}`);
+        console.log('로그인 성공')
       })
       .catch((error) => {
         // 로그인 실패 시
