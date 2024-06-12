@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, FormControlLabel, Radio, RadioGroup, Container, Typography, Paper, Grid, Tooltip } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
 import { signup, checkUserId } from './API/ApiService';
 
 const Register = () => {
@@ -9,7 +8,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [location, setLocation] = useState('AndN');
+  const [location, setLocation] = useState('앤드앤');
   const [passwordError, setPasswordError] = useState('');
   const [passwordValid, setPasswordValid] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
@@ -77,19 +76,10 @@ const Register = () => {
     }
 
     checkUserId({ userID: userId })
-      .then((response) => {
-        if (response.exists) {
-          setUserIdError('이미 존재하는 아이디입니다.');
-          alert('이미 존재하는 아이디입니다.');
-        } else {
-          setUserIdError('');
-          alert('사용 가능한 아이디입니다.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error during user ID check:', error);
-      });
+
   };
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -188,6 +178,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 

@@ -68,10 +68,11 @@ export function signup(userDTO) {
 export function checkUserId(userDTO) {
     return call("/api/auth/checkUserID", "POST", userDTO)
         .then((response) => {
+            alert("사용 가능한 아이디입니다.");
             return response;
         })
         .catch((error) => {
             console.error("Error during user ID check:", error);
-            alert("이미 존재하는 아이디 입니다.");
+            alert("중복된 아이디가 존재합니다. 다시 입력해주세요.");
         });
 }
