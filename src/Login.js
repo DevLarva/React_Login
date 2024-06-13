@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
-import { Box, TextField, Button, Container, Typography, Paper, Grid } from '@mui/material';
+import { Box, TextField, Button, Container, Typography, Paper, Grid, InputAdornment, IconButton } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Andnlogo from './assets/andnlogo.png';
 import { signin } from './API/ApiService'; // signin 함수 import
 
@@ -11,6 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [location, setLocation] = useState('A');
+  // 비번 보이게 or 안보이게
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
     const userDTO = {
@@ -23,13 +27,21 @@ const Login = () => {
         // 로그인 성공 시
         setUser({ userId, location });
         navigate(`/home/${location}`);
-        console.log('로그인 성공')
+        console.log('로그인 성공');
       })
       .catch((error) => {
         // 로그인 실패 시
         alert('로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.');
         console.error('Login error:', error);
       });
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -54,10 +66,23 @@ const Login = () => {
             required
             fullWidth
             label="비밀번호"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Button
             fullWidth
@@ -98,3 +123,4 @@ const Login = () => {
 };
 
 export default Login;
+
