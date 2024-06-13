@@ -7,6 +7,7 @@ import { GlobalContextProvider } from './GlobalContext';
 import './styles.css';
 import PasswordFd from './PasswordFd';
 import UseridFd from './UseridFd';
+import AndnMain from './AndnMain';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/home/:location" element={<Home />} />
           <Route path="/find-userid" element={<UseridFd />} />
           <Route path="/find-password" element={<PasswordFd />} />
+          <Route path="/AndnMain" element={<AndnMain />} />
         </Routes>
       </Router>
     </GlobalContextProvider>
@@ -25,3 +27,10 @@ function App() {
 }
 
 export default App;
+
+
+/* TODO:
+- 로그인 여부에 따라 제한 접근 라우팅 구현 필요
+- 로그인 이후에 분기 처리 필요
+
+*/

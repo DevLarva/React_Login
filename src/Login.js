@@ -12,7 +12,7 @@ const Login = () => {
   const [userId, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const [location, setLocation] = useState('A');
+  const [location, setLocation] = useState('');
   // 비번 보이게 or 안보이게
   const [showPassword, setShowPassword] = useState(false);
 
