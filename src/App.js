@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
@@ -8,6 +8,7 @@ import './styles.css';
 import PasswordFd from './PasswordFd';
 import UseridFd from './UseridFd';
 import AndnMain from './AndnMain';
+import PrivateRoute from './PrivateRoute'; // Import PrivateRoute
 
 function App() {
   return (
@@ -16,10 +17,24 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home/:location" element={<Home />} />
           <Route path="/find-userid" element={<UseridFd />} />
           <Route path="/find-password" element={<PasswordFd />} />
-          <Route path="/AndnMain" element={<AndnMain />} />
+          <Route
+            path="/home/:location"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/AndnMain"
+            element={
+              <PrivateRoute>
+                <AndnMain />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Router>
     </GlobalContextProvider>
@@ -27,6 +42,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 /* TODO:
