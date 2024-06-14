@@ -38,7 +38,7 @@ const PasswordFd = () => {
 
     return (
         <Container component="main" maxWidth={false}>
-            <Grid container disableGutters sx={{ height: '100vh', display: 'flex' }}>
+            <Grid container disablegutters sx={{ height: '100vh', display: 'flex' }}>
                 <Grid item xs={8}>
                     <Box
                         sx={{
@@ -81,7 +81,7 @@ const PasswordFd = () => {
                                 <TextField
                                     margin="normal"
                                     required
-                                    fullWidth  
+                                    fullWidth
                                     label="이메일"
                                     autoComplete="emailField"
                                     placeholder='인증번호를 받을 이메일을 입력해주세요.'
