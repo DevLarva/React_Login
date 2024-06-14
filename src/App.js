@@ -7,8 +7,10 @@ import { GlobalContextProvider } from './GlobalContext';
 import './styles.css';
 import PasswordFd from './PasswordFd';
 import UseridFd from './UseridFd';
-import AndnMain from './AndnMain';
+import AndnMain from './Main/AndnMain';
 import PrivateRoute from './PrivateRoute'; // Import PrivateRoute
+import ClientMain from './Main/ClientMain';
+import OutsourcingMain from './Main/OutsourcingMain';
 
 function App() {
   return (
