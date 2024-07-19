@@ -29,7 +29,13 @@ const UseridFd = () => {
             console.error('아이디 찾기 오류:', error);
         }
     };
+    const handleCheckUserName = () => {
+        if (!name) {
+            alert('이름을 입력해주세요.');
+            return;
+        }
 
+    };
     return (
         <Container component="main" maxWidth="xs">
             <Paper elevation={3} sx={{ padding: 3, marginTop: 10 }}>
@@ -37,10 +43,10 @@ const UseridFd = () => {
                     아이디 찾기
                 </Typography>
 
-                <Typography component="h2" variant="h6" sx={{ mt: 2, mb: 1 }}>
+                <Typography component="h2" variant="h6" sx={{ mt: 2 }}>
                     이름을 입력해주세요.
                 </Typography>
-                <Box component="form" noValidate sx={{ mt: 1 }}>
+                <Box component="form" noValidate >
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -62,21 +68,22 @@ const UseridFd = () => {
                         sx={{ justifyContent: 'center', marginTop: 1 }}
                     >
                         <Tooltip title="앤드앤 회사에 속한 경우 선택하세요." placement="top" arrow>
-                            <FormControlLabel value="앤드앤" control={<Radio />} label="앤드앤" sx={{ mx: 2 }} />
+                            <FormControlLabel value="앤드앤" control={<Radio />} label="앤드앤" sx={{ mx: 1 }} />
                         </Tooltip>
                         <Tooltip title="클라이언트인 경우 선택하세요." placement="top" arrow>
-                            <FormControlLabel value="클라이언트" control={<Radio />} label="클라이언트" sx={{ mx: 2 }} />
+                            <FormControlLabel value="클라이언트" control={<Radio />} label="클라이언트" sx={{ mx: 1 }} />
                         </Tooltip>
                         <Tooltip title="외주업체인 경우 선택하세요." placement="top" arrow>
-                            <FormControlLabel value="외주업체" control={<Radio />} label="외주업체" sx={{ mx: 2 }} />
+                            <FormControlLabel value="외주업체" control={<Radio />} label="외주업체" sx={{ mx: 1 }} />
                         </Tooltip>
                     </RadioGroup>
                     <Button
                         fullWidth
                         variant="contained"
                         color="primary"
+                        size='large'
                         sx={{ mt: 3, mb: 2 }}
-                        onClick={handleFindId}
+                        onClick={handleFindId && handleCheckUserName}
                     >
                         아이디 찾기
                     </Button>
