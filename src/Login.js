@@ -26,8 +26,7 @@ const Login = () => {
       .then((response) => {
         // 로그인 성공 시
         setUser({ userId, location });
-        navigate(`/home/AndnMain`);
-        //navigate(`/home/${location}`);
+        navigate(`/home/${location}`);
         console.log('로그인 성공');
       })
       .catch((error) => {
