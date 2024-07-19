@@ -124,3 +124,95 @@ const Login = () => {
 
 export default Login;
 
+
+
+//로그인 분기처리 코드
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { TextField, Button, Container, Typography } from '@mui/material';
+
+// const Login = () => {
+//     const [username, setUsername] = useState('');
+//     const [password, setPassword] = useState('');
+//     const navigate = useNavigate();
+
+//     const handleLogin = async () => {
+//         // 서버에 로그인 요청 보내기
+//         try {
+//             const response = await fetch('/api/login', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify({ username, password }),
+//             });
+            
+//             const data = await response.json();
+
+//             if (response.ok) {
+//                 // 로그인 성공
+//                 const userType = data.userType; // 서버에서 반환된 사용자 타입
+
+//                 // 사용자 타입에 따라 리다이렉트
+//                 if (userType === 'AND') {
+//                     navigate('/AndnMain');
+//                 } else if (userType === 'Client') {
+//                     navigate('/ClientMain');
+//                 } else if (userType === 'Outsourcing') {
+//                     navigate('/OutsourcingMain');
+//                 } else {
+//                     navigate('/home');
+//                 }
+//             } else {
+//                 // 로그인 실패 처리
+//                 console.error('로그인 실패:', data.message);
+//             }
+//         } catch (error) {
+//             console.error('로그인 오류:', error);
+//         }
+//     };
+
+//     return (
+//         <Container component="main" maxWidth="xs">
+//             <Typography component="h1" variant="h5">
+//                 로그인
+//             </Typography>
+//             <TextField
+//                 variant="outlined"
+//                 margin="normal"
+//                 required
+//                 fullWidth
+//                 id="username"
+//                 label="사용자 이름"
+//                 name="username"
+//                 autoComplete="username"
+//                 autoFocus
+//                 value={username}
+//                 onChange={(e) => setUsername(e.target.value)}
+//             />
+//             <TextField
+//                 variant="outlined"
+//                 margin="normal"
+//                 required
+//                 fullWidth
+//                 name="password"
+//                 label="비밀번호"
+//                 type="password"
+//                 id="password"
+//                 autoComplete="current-password"
+//                 value={password}
+//                 onChange={(e) => setPassword(e.target.value)}
+//             />
+//             <Button
+//                 fullWidth
+//                 variant="contained"
+//                 color="primary"
+//                 onClick={handleLogin}
+//             >
+//                 로그인
+//             </Button>
+//         </Container>
+//     );
+// };
+
+// export default Login;
