@@ -103,20 +103,6 @@ const Login = () => {
             </Button>
           </Link>
         </Grid>
-        <Grid item xs={4}>
-          <Link to="/find-password" style={{ textDecoration: 'none' }}>
-            <Button fullWidth color="primary">
-              비밀번호 찾기
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item xs={4}>
-          <Link to="/find-userid" style={{ textDecoration: 'none' }}>
-            <Button fullWidth color="primary">
-              아이디 찾기
-            </Button>
-          </Link>
-        </Grid>
       </Grid>
     </Container>
   );

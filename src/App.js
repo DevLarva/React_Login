@@ -19,8 +19,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/find-userid" element={<UseridFd />} />
-          <Route path="/find-password" element={<PasswordFd />} />
           <Route
             path="/home/:location"
             element={
