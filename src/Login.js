@@ -118,17 +118,16 @@ const Login = () => {
             로그인
           </Button>
         </Box>
-        <Divider />
-        <Grid item xs={4} sx={{ marginTop: 3 }} >
-          <Link to="/register" style={{ textDecoration: 'none' }}>
-            <Button fullWidth color="primary">
-              회원가입
-            </Button>
-          </Link>
-        </Grid>
-      </Paper>
-
-    </Container>
+      </Paper >
+      <Divider />
+      <Grid item xs={4} sx={{ marginTop: 3 }} >
+        <Link to="/register" style={{ textDecoration: 'none' }}>
+          <Button fullWidth color="primary">
+            회원가입
+          </Button>
+        </Link>
+      </Grid>
+    </Container >
   );
 };
 
