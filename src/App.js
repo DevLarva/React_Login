@@ -2,15 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
-import Home from './Home';
-import { GlobalContextProvider } from './GlobalContext';
-import './styles.css';
-import PasswordFd from './PasswordFd';
-import UseridFd from './UseridFd';
 import AndnMain from './Main/AndnMain';
-import PrivateRoute from './PrivateRoute'; // Import PrivateRoute
 import ClientMain from './Main/ClientMain';
 import OutsourcingMain from './Main/OutsourcingMain';
+import { GlobalContextProvider } from './GlobalContext';
+import './styles.css';
+import PrivateRoute from './PrivateRoute'; // Import PrivateRoute
 
 function App() {
   return (
@@ -20,18 +17,26 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/home/:location"
-            element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
-            }
-          />
-          <Route
             path="/AndnMain"
             element={
               <PrivateRoute>
                 <AndnMain />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/ClientMain"
+            element={
+              <PrivateRoute>
+                <ClientMain />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/OutsourcingMain"
+            element={
+              <PrivateRoute>
+                <OutsourcingMain />
               </PrivateRoute>
             }
           />
@@ -42,8 +47,6 @@ function App() {
 }
 
 export default App;
-
-
 
 
 /* TODO:
