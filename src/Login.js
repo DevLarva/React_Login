@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
-import { Box, TextField, Button, Container, Typography, Paper, Grid, InputAdornment, IconButton } from '@mui/material';
+import { Box, TextField, Button, Container, Typography, Paper, Grid, InputAdornment, IconButton, Divider } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Andnlogo from './assets/andnlogo.png';
@@ -62,6 +62,11 @@ const Login = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -69,7 +74,7 @@ const Login = () => {
         <img src={Andnlogo} alt="And N" height={70} style={{ filter: 'invert(1)' }} />
       </Typography>
       <Paper elevation={5} sx={{ padding: 2, marginTop: 2 }}>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box component="form" noValidate sx={{ mt: 1 }} onKeyDown={handleKeyDown}>
           <TextField
             margin="normal"
             required
@@ -113,30 +118,16 @@ const Login = () => {
             로그인
           </Button>
         </Box>
-      </Paper>
-      <Grid container spacing={1} justifyContent="space-between" sx={{ marginTop: 0.1 }}>
-        <Grid item xs={4}>
+        <Divider />
+        <Grid item xs={4} sx={{ marginTop: 3 }} >
           <Link to="/register" style={{ textDecoration: 'none' }}>
             <Button fullWidth color="primary">
               회원가입
             </Button>
           </Link>
         </Grid>
-        <Grid item xs={4}>
-          <Link to="/find-password" style={{ textDecoration: 'none' }}>
-            <Button fullWidth color="primary">
-              비밀번호 찾기
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item xs={4}>
-          <Link to="/find-userid" style={{ textDecoration: 'none' }}>
-            <Button fullWidth color="primary">
-              아이디 찾기
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
+      </Paper>
+
     </Container>
   );
 };
